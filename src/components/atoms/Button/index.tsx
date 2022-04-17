@@ -1,0 +1,37 @@
+import React from 'react';
+import { View, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+
+type ButtonProps = {
+  type?: string,
+  title: string,
+};
+
+type Style = {
+  container: (type: string | undefined) => ViewStyle,
+  text: (type: string | undefined) => TextStyle,
+};
+
+export default function Button({
+  type,
+  title,
+}: ButtonProps): React.ReactElement {
+  return (
+    <View style={styles.container(type)}>
+      <Text style={styles.text(type)}>{title}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create<Style>({
+  container: (type) => ({
+    backgroundColor: type === 'secondary' ? '#fff' : '#0bcad4',
+    paddingVertical: 10,
+    borderRadius: 10,
+  }),
+  text: (type) => ({
+    fontSize: 18,
+    fontWeight: '600',
+    textAlign: 'center',
+    color: type === 'secondary' ? '#0bcad4' : '#fff',
+  }),
+});
