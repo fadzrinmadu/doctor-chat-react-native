@@ -29,9 +29,9 @@ const styles = StyleSheet.create<Style>({
     borderRadius: 10,
   }),
   text: (type) => ({
-    fontSize: 18,
-    fontWeight: '600',
-    textAlign: 'center',
     color: type === 'secondary' ? '#0bcad4' : '#fff',
+    fontSize: 18,
+    fontFamily: 'Nunito-SemiBold',
+    textAlign: 'center',
   }),
 });
