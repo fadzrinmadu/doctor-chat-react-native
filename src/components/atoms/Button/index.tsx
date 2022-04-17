@@ -1,9 +1,16 @@
 import React from 'react';
-import { View, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  ViewStyle,
+} from 'react-native';
 
 type ButtonProps = {
   type?: string,
   title: string,
+  onPress?: () => void,
 };
 
 type Style = {
@@ -14,11 +21,12 @@ type Style = {
 export default function Button({
   type,
   title,
+  onPress,
 }: ButtonProps): React.ReactElement {
   return (
-    <View style={styles.container(type)}>
+    <TouchableOpacity style={styles.container(type)} onPress={onPress}>
       <Text style={styles.text(type)}>{title}</Text>
-    </View>
+    </TouchableOpacity>
   );
 }
 
