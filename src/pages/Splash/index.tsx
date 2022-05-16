@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { ILLogo } from '../../assets';
 
-
-export default function Splash({ navigation }): React.ReactElement {
+export default function Splash({ navigation }: any): React.ReactElement {
   useEffect(() => {
     setTimeout(() => {
       navigation.replace('GetStarted');

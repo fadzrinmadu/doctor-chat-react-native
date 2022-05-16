@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ViewStyle,
 } from 'react-native';
+import { colors } from '../../../utils';
 
 type ButtonProps = {
   type?: string,
@@ -32,12 +33,18 @@ export default function Button({
 
 const styles = StyleSheet.create<Style>({
   container: (type) => ({
-    backgroundColor: type === 'secondary' ? '#fff' : '#0bcad4',
+    backgroundColor:
+      type === 'secondary'
+        ? colors.button.secondary.background
+        : colors.button.primary.background,
     paddingVertical: 10,
     borderRadius: 10,
   }),
   text: (type) => ({
-    color: type === 'secondary' ? '#0bcad4' : '#fff',
+    color:
+      type === 'secondary'
+        ? colors.button.secondary.text
+        : colors.button.primary.text,
     fontSize: 18,
     fontFamily: 'Nunito-SemiBold',
     textAlign: 'center',
