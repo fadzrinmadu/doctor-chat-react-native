@@ -1,9 +1,13 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { ILGetStarted, ILLogo } from '../../assets';
 import { Button, Gap } from '../../components';
+import { colors } from '../../utils';
 
-export default function GetStarted({ navigation }) {
+export default function GetStarted() {
+  const navigation = useNavigation();
+
   return (
     <ImageBackground source={ILGetStarted} style={styles.page}>
       <View>
@@ -32,10 +36,11 @@ const styles = StyleSheet.create({
   page: {
     padding: 40,
     justifyContent: 'space-between',
+    backgroundColor: colors.white,
     flex: 1,
   },
   title: {
-    color: '#fff',
+    color: colors.white,
     fontSize: 28,
     fontFamily: 'Nunito-SemiBold',
     lineHeight: 40,

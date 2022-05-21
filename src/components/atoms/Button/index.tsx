@@ -8,9 +8,12 @@ import {
 } from 'react-native';
 import { colors } from '../../../utils';
 
+import IconOnly from './IconOnly';
+
 type ButtonProps = {
   type?: string,
-  title: string,
+  title?: string,
+  icon?: string,
   onPress?: () => void,
 };
 
@@ -22,8 +25,13 @@ type Style = {
 export default function Button({
   type,
   title,
+  icon,
   onPress,
 }: ButtonProps): React.ReactElement {
+  if (type === 'icon-only') {
+    return <IconOnly icon={icon} onPress={onPress} />;
+  }
+
   return (
     <TouchableOpacity style={styles.container(type)} onPress={onPress}>
       <Text style={styles.text(type)}>{title}</Text>

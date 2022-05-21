@@ -1,12 +1,15 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Gap, Header, Input } from '../../components';
 import { colors } from '../../utils';
 
 export default function Register() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.page}>
-      <Header />
+      <Header title="Daftar Akun" onPress={() => navigation.goBack()} />
       <View style={styles.content}>
         <Input label="Full Name" />
         <Gap height={24} />
