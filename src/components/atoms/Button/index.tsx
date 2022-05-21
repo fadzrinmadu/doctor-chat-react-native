@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ViewStyle,
 } from 'react-native';
-import { colors } from '../../../utils';
+import { colors, fonts } from '../../../utils';
 
 import IconOnly from './IconOnly';
 
@@ -54,7 +54,7 @@ const styles = StyleSheet.create<Style>({
         ? colors.button.secondary.text
         : colors.button.primary.text,
     fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: fonts.primary[600],
     textAlign: 'center',
   }),
 });

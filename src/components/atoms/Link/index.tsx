@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, ViewStyle } from 'react-native';
-import { colors } from '../../../utils';
+import { colors, fonts } from '../../../utils';
 
 type LinkProps = {
   title: string,
@@ -26,7 +26,7 @@ const styles = StyleSheet.create<Style>({
   text: (size: number, align: string) => ({
     color: colors.text.secondary,
     fontSize: size,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: fonts.primary.normal,
     textDecorationLine: 'underline',
     textAlign: align,
   }),

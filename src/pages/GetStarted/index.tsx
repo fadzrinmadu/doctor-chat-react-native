@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { ILGetStarted, ILLogo } from '../../assets';
 import { Button, Gap } from '../../components';
-import { colors } from '../../utils';
+import { colors, fonts } from '../../utils';
 
 export default function GetStarted() {
   const navigation = useNavigation();
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   title: {
     color: colors.white,
     fontSize: 28,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: fonts.primary[600],
     lineHeight: 40,
     marginTop: 90,
   },
