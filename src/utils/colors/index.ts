@@ -1,6 +1,7 @@
 const mainColors = {
   green1: '#0bcad4',
   dark1: '#112340',
+  dark2: '#495A75',
   gray1: '#7d8797',
   gray2: '#e9e9e9',
 };
@@ -13,6 +14,8 @@ const colors: any = {
   text: {
     primary: mainColors.dark1,
     secondary: mainColors.gray1,
+    menuActive: mainColors.green1,
+    menuInactive: mainColors.dark2,
   },
   button: {
     primary: {
