@@ -1,14 +1,36 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { ILCatUmum } from '../../../assets';
+import { ILCatObat, ILCatPsikiater, ILCatUmum } from '../../../assets';
 import { colors, fonts } from '../../../utils';
 
-export default function DoctorCategory() {
+type DoctorCategoryProps = {
+  category: string,
+};
+
+export default function DoctorCategory(props: DoctorCategoryProps) {
+  const { category } = props;
+
+  const Icon = () => {
+    if (category === 'dokter umum') {
+      return <ILCatUmum style={styles.illustration} />;
+    }
+
+    if (category === 'psikiater') {
+      return <ILCatPsikiater style={styles.illustration} />;
+    }
+
+    if (category === 'dokter obat') {
+      return <ILCatObat style={styles.illustration} />;
+    }
+
+    return <ILCatUmum style={styles.illustration} />;
+  };
+
   return (
     <View style={styles.container}>
-      <ILCatUmum style={styles.ilustration} />
+      <Icon />
       <Text style={styles.label}>Saya butuh</Text>
-      <Text style={styles.category}>dokter umum</Text>
+      <Text style={styles.category}>{category}</Text>
     </View>
   );
 }
@@ -23,7 +45,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 130,
   },
-  ilustration: {
+  illustration: {
     marginBottom: 28,
   },
   label: {
