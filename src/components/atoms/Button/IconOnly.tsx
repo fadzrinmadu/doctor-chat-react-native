@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { IconBackDark } from '../../../assets';
+import { IconBackDark, IconBackLight } from '../../../assets';
 
 type IconOnlyProps = {
   onPress?: () => void,
@@ -14,7 +14,7 @@ export default function IconOnly({ onPress, icon }: IconOnlyProps) {
     }
 
     if (icon === 'back-light') {
-      return <IconBackDark />;
+      return <IconBackLight />;
     }
 
     return <IconBackDark />;

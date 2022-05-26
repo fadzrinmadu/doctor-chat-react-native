@@ -11,6 +11,7 @@ import {
   Hospitals,
   GetStarted,
   UploadPhoto,
+  ChooseDoctor,
 } from '../pages';
 import { ButtonNavigator } from '../components';
 
@@ -70,6 +71,11 @@ export default function Router() {
       <Stack.Screen
         name="MainApp"
         component={MainApp}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ChooseDoctor"
+        component={ChooseDoctor}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

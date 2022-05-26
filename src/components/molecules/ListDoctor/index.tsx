@@ -6,24 +6,27 @@ import {
   StyleSheet,
   ImageSourcePropType,
 } from 'react-native';
+import { IconNext } from '../../../assets';
 import { colors, fonts } from '../../../utils';
 
 type ListDoctorProps = {
   name: string,
   description: string,
   picture: ImageSourcePropType,
+  type: string,
 };
 
 export default function ListDoctor(props: ListDoctorProps) {
-  const { name, description, picture } = props;
+  const { name, description, picture, type } = props;
 
   return (
     <View style={styles.container}>
       <Image source={picture} style={styles.avatar} />
-      <View>
+      <View style={styles.content}>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.desc}>{description}</Text>
       </View>
+      {type === 'next' && <IconNext />}
     </View>
   );
 }
@@ -35,6 +38,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
     alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  content: {
+    flex: 1,
   },
   avatar: {
     width: 46,

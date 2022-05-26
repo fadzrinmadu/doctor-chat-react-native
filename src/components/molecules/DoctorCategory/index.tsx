@@ -1,14 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { ILCatObat, ILCatPsikiater, ILCatUmum } from '../../../assets';
 import { colors, fonts } from '../../../utils';
 
 type DoctorCategoryProps = {
   category: string,
+  onPress: () => void,
 };
 
 export default function DoctorCategory(props: DoctorCategoryProps) {
-  const { category } = props;
+  const { category, onPress } = props;
 
   const Icon = () => {
     if (category === 'dokter umum') {
@@ -27,11 +28,11 @@ export default function DoctorCategory(props: DoctorCategoryProps) {
   };
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Icon />
       <Text style={styles.label}>Saya butuh</Text>
       <Text style={styles.category}>{category}</Text>
-    </View>
+    </TouchableOpacity>
   );
 }
 

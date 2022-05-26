@@ -6,6 +6,7 @@ import Register from './Register';
 import Hospitals from './Hospitals';
 import GetStarted from './GetStarted';
 import UploadPhoto from './UploadPhoto';
+import ChooseDoctor from './ChooseDoctor';
 
 export {
   Login,
@@ -16,4 +17,5 @@ export {
   Hospitals,
   GetStarted,
   UploadPhoto,
+  ChooseDoctor,
 };

@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { JSONCategoryDoctor } from '../../assets';
@@ -11,6 +12,8 @@ import {
 import { colors, fonts } from '../../utils';
 
 export default function Doctor() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.page}>
       <View style={styles.content}>
@@ -27,7 +30,11 @@ export default function Doctor() {
               <View style={styles.category}>
                 <Gap width={32} />
                 {JSONCategoryDoctor.data.map((item) => (
-                  <DoctorCategory key={item.id} category={item.category} />
+                  <DoctorCategory
+                    key={item.id}
+                    category={item.category}
+                    onPress={() => navigation.navigate('ChooseDoctor')}
+                  />
                 ))}
                 <Gap width={22} />
               </View>
