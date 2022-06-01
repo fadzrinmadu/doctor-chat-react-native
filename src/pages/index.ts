@@ -9,6 +9,7 @@ import EditProfile from './EditProfile';
 import UserProfile from './UserProfile';
 import UploadPhoto from './UploadPhoto';
 import ChooseDoctor from './ChooseDoctor';
+import DoctorProfile from './DoctorProfile';
 
 export {
   Login,
@@ -22,4 +23,5 @@ export {
   UserProfile,
   UploadPhoto,
   ChooseDoctor,
+  DoctorProfile,
 };

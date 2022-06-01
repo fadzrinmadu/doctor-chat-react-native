@@ -4,6 +4,7 @@ import Profile from './Profile';
 import ChatItem from './ChatItem';
 import NewsItem from './NewsItem';
 import ChatInput from './ChatInput';
+import ProfileItem from './ProfileItem';
 import HomeProfile from './HomeProfile';
 import DoctorRated from './DoctorRated';
 import DoctorCategory from './DoctorCategory';
@@ -16,6 +17,7 @@ export {
   NewsItem,
   ChatItem,
   ChatInput,
+  ProfileItem,
   HomeProfile,
   DoctorRated,
   DoctorCategory,

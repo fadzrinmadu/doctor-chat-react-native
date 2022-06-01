@@ -1,7 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { JSONCategoryDoctor } from '../../assets';
+import {
+  JSONCategoryDoctor,
+  DummyDoctor1,
+  DummyDoctor2,
+  DummyDoctor3,
+} from '../../assets';
 import {
   Gap,
   NewsItem,
@@ -42,9 +47,24 @@ export default function Doctor() {
           </View>
           <View style={styles.wrapperSection}>
             <Text style={styles.sectionLabel}>Top Rated Category</Text>
-            <DoctorRated />
-            <DoctorRated />
-            <DoctorRated />
+            <DoctorRated
+              name="Alexa Rachel"
+              description="Pediatrician"
+              picture={DummyDoctor1}
+              onPress={() => navigation.navigate('DoctorProfile')}
+            />
+            <DoctorRated
+              name="Sunny Frank"
+              description="Dentist"
+              picture={DummyDoctor2}
+              onPress={() => navigation.navigate('DoctorProfile')}
+            />
+            <DoctorRated
+              name="Poe Min"
+              description="Podiatrist"
+              picture={DummyDoctor3}
+              onPress={() => navigation.navigate('DoctorProfile')}
+            />
             <Text style={styles.sectionLabel}>Good News</Text>
           </View>
           <NewsItem />

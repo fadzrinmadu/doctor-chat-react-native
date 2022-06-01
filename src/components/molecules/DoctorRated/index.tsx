@@ -1,16 +1,28 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, ImageSourcePropType, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { IconStar } from '../../../assets';
 import { DummyDoctor1 } from '../../../assets/dummy';
 import { colors, fonts } from '../../../utils';
 
-export default function DoctorRated() {
+type DoctorProfileProps = {
+  name: string,
+  description: string,
+  picture: ImageSourcePropType,
+  onPress: () => void,
+};
+
+export default function DoctorRated({
+  name,
+  onPress,
+  picture,
+  description,
+}: DoctorProfileProps) {
   return (
-    <View style={styles.container}>
-      <Image source={DummyDoctor1} style={styles.avatar} />
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <Image source={picture} style={styles.avatar} />
       <View style={styles.profile}>
-        <Text style={styles.name}>Alexa Rachel</Text>
-        <Text style={styles.category}>Pediatrician</Text>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.category}>{description}</Text>
       </View>
       <View style={styles.rate}>
         <IconStar />
@@ -19,7 +31,7 @@ export default function DoctorRated() {
         <IconStar />
         <IconStar />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -27,6 +39,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     paddingBottom: 16,
   },
   avatar: {
