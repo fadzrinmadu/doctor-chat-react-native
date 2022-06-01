@@ -1,16 +1,27 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import { DummyUser } from '../../../assets';
+import { DummyUser, IconRemovePhoto } from '../../../assets';
 import { colors, fonts } from '../../../utils';
 
-function Profile() {
+type ProfileProps = {
+  name?: string,
+  description?: string,
+  isRemove?: boolean,
+};
+
+function Profile({ name, description, isRemove }: ProfileProps) {
   return (
     <View style={styles.container}>
       <View style={styles.borderProfile}>
         <Image style={styles.avatar} source={DummyUser} />
+        {isRemove && <IconRemovePhoto style={styles.removePhoto} />}
       </View>
-      <Text style={styles.name}>Shayna Melinda</Text>
-      <Text style={styles.profession}>Product Designer</Text>
+      {name && (
+        <View>
+          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.profession}>{description}</Text>
+        </View>
+      )}
     </View>
   );
 }
@@ -33,6 +44,11 @@ const styles = StyleSheet.create({
     width: 110,
     height: 110,
     borderRadius: 110 / 2,
+  },
+  removePhoto: {
+    position: 'absolute',
+    right: 8,
+    bottom: 8,
   },
   name: {
     fontSize: 20,

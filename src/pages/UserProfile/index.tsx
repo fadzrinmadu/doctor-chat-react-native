@@ -11,13 +11,14 @@ function UserProfile() {
     <View style={styles.page}>
       <Header title="Profile" onPress={() => navigation.goBack()} />
       <Gap height={10} />
-      <Profile />
+      <Profile name="Shayna Melinda" description="Product Designer" />
       <Gap height={14} />
       <List
         name="Edit Profile"
         description="Last Update Yesterday"
         type="next"
         icon="edit-profile"
+        onPress={() => navigation.navigate('EditProfile')}
       />
       <List
         name="Edit Profile"

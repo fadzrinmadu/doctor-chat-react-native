@@ -13,6 +13,7 @@ import {
   UserProfile,
   UploadPhoto,
   ChooseDoctor,
+  EditProfile,
 } from '../pages';
 import { ButtonNavigator } from '../components';
 import Chatting from '../pages/Chatting';
@@ -88,6 +89,11 @@ export default function Router() {
       <Stack.Screen
         name="UserProfile"
         component={UserProfile}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfile}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
