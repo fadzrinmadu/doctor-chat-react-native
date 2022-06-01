@@ -14,6 +14,7 @@ import {
   ChooseDoctor,
 } from '../pages';
 import { ButtonNavigator } from '../components';
+import Chatting from '../pages/Chatting';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -76,6 +77,11 @@ export default function Router() {
       <Stack.Screen
         name="ChooseDoctor"
         component={ChooseDoctor}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Chatting"
+        component={Chatting}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

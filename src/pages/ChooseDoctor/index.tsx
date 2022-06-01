@@ -30,30 +30,35 @@ function ChooseDoctor() {
         name="Alexander Jannie"
         description="Wanita"
         picture={DummyDoctor1}
+        onPress={() => navigation.navigate('Chatting')}
       />
       <ListDoctor
         type="next"
         name="John McParker Steve"
         description="Pria"
         picture={DummyDoctor2}
+        onPress={() => navigation.navigate('Chatting')}
       />
       <ListDoctor
         type="next"
         name="Nairobi Putri Hayza"
         description="Wanita"
         picture={DummyDoctor3}
+        onPress={() => navigation.navigate('Chatting')}
       />
       <ListDoctor
         type="next"
         name="James Rivillia"
         description="Pria"
         picture={DummyDoctor4}
+        onPress={() => navigation.navigate('Chatting')}
       />
       <ListDoctor
         type="next"
         name="Liu Yue Tian Park"
         description="Wanita"
         picture={DummyDoctor5}
+        onPress={() => navigation.navigate('Chatting')}
       />
     </View>
   );

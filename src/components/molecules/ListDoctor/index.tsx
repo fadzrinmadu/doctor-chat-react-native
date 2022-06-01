@@ -5,6 +5,7 @@ import {
   Image,
   StyleSheet,
   ImageSourcePropType,
+  TouchableOpacity,
 } from 'react-native';
 import { IconNext } from '../../../assets';
 import { colors, fonts } from '../../../utils';
@@ -14,20 +15,21 @@ type ListDoctorProps = {
   description: string,
   picture: ImageSourcePropType,
   type: string,
+  onPress: () => void,
 };
 
 export default function ListDoctor(props: ListDoctorProps) {
-  const { name, description, picture, type } = props;
+  const { name, description, picture, type, onPress } = props;
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image source={picture} style={styles.avatar} />
       <View style={styles.content}>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.desc}>{description}</Text>
       </View>
       {type === 'next' && <IconNext />}
-    </View>
+    </TouchableOpacity>
   );
 }
 
