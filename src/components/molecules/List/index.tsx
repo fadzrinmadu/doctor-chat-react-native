@@ -7,23 +7,50 @@ import {
   ImageSourcePropType,
   TouchableOpacity,
 } from 'react-native';
-import { IconNext } from '../../../assets';
+import {
+  IconEditProfile,
+  IconHelp,
+  IconLanguage,
+  IconNext,
+  IconRate,
+} from '../../../assets';
 import { colors, fonts } from '../../../utils';
 
-type ListDoctorProps = {
+type ListProps = {
   name: string,
   description: string,
-  picture: ImageSourcePropType,
-  type: string,
-  onPress: () => void,
+  picture?: ImageSourcePropType,
+  type?: string,
+  icon?: string,
+  onPress?: () => void,
 };
 
-export default function ListDoctor(props: ListDoctorProps) {
-  const { name, description, picture, type, onPress } = props;
+function List(props: ListProps) {
+  const { name, description, picture, type, icon, onPress } = props;
+
+  const Icon = () => {
+    if (icon === 'edit-profile') {
+      return <IconEditProfile />;
+    }
+
+    if (icon === 'language') {
+      return <IconLanguage />;
+    }
+
+    if (icon === 'rate') {
+      return <IconRate />;
+    }
+
+    if (icon === 'help') {
+      return <IconHelp />;
+    }
+
+    return <IconEditProfile />;
+  };
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Image source={picture} style={styles.avatar} />
+      {icon ? <Icon /> : <Image source={picture} style={styles.avatar} />}
       <View style={styles.content}>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.desc}>{description}</Text>
@@ -44,12 +71,12 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
+    marginLeft: 16,
   },
   avatar: {
     width: 46,
     height: 46,
     borderRadius: 46 / 2,
-    marginRight: 12,
   },
   name: {
     fontSize: 16,
@@ -62,3 +89,5 @@ const styles = StyleSheet.create({
     color: colors.text.secondary,
   },
 });
+
+export default List;

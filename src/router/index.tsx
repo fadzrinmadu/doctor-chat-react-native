@@ -10,6 +10,7 @@ import {
   Messages,
   Hospitals,
   GetStarted,
+  UserProfile,
   UploadPhoto,
   ChooseDoctor,
 } from '../pages';
@@ -82,6 +83,11 @@ export default function Router() {
       <Stack.Screen
         name="Chatting"
         component={Chatting}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="UserProfile"
+        component={UserProfile}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

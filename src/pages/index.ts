@@ -5,6 +5,7 @@ import Messages from './Messages';
 import Register from './Register';
 import Hospitals from './Hospitals';
 import GetStarted from './GetStarted';
+import UserProfile from './UserProfile';
 import UploadPhoto from './UploadPhoto';
 import ChooseDoctor from './ChooseDoctor';
 
@@ -16,6 +17,7 @@ export {
   Messages,
   Hospitals,
   GetStarted,
+  UserProfile,
   UploadPhoto,
   ChooseDoctor,
 };

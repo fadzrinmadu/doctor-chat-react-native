@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { Gap, Header, ListDoctor } from '../../components';
+import { Gap, Header, List } from '../../components';
 
 import { colors } from '../../utils';
 
@@ -25,35 +25,35 @@ function ChooseDoctor() {
         onPress={() => navigation.goBack()}
       />
       <Gap height={20} />
-      <ListDoctor
+      <List
         type="next"
         name="Alexander Jannie"
         description="Wanita"
         picture={DummyDoctor1}
         onPress={() => navigation.navigate('Chatting')}
       />
-      <ListDoctor
+      <List
         type="next"
         name="John McParker Steve"
         description="Pria"
         picture={DummyDoctor2}
         onPress={() => navigation.navigate('Chatting')}
       />
-      <ListDoctor
+      <List
         type="next"
         name="Nairobi Putri Hayza"
         description="Wanita"
         picture={DummyDoctor3}
         onPress={() => navigation.navigate('Chatting')}
       />
-      <ListDoctor
+      <List
         type="next"
         name="James Rivillia"
         description="Pria"
         picture={DummyDoctor4}
         onPress={() => navigation.navigate('Chatting')}
       />
-      <ListDoctor
+      <List
         type="next"
         name="Liu Yue Tian Park"
         description="Wanita"
