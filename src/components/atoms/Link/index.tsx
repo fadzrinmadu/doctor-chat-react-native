@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, ViewStyle } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, ViewStyle } from 'react-native';
 import { colors, fonts } from '../../../utils';
 
 type LinkProps = {
   title: string,
   size: number,
   align: string,
+  onPress?: () => void,
 };
 
 type Style = {
@@ -13,12 +14,12 @@ type Style = {
 };
 
 export default function Link(props: LinkProps) {
-  const { title, size, align } = props;
+  const { title, size, align, onPress } = props;
 
   return (
-    <View>
+    <TouchableOpacity onPress={onPress}>
       <Text style={styles.text(size, align)}>{title}</Text>
-    </View>
+    </TouchableOpacity>
   );
 }
 

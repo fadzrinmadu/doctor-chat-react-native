@@ -3,8 +3,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import { List } from '../../components';
 import { colors, fonts } from '../../utils';
 import { DummyDoctor4, DummyDoctor5, DummyDoctor6 } from '../../assets';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Messages() {
+  const navigation = useNavigation();
+
   const [doctors] = useState([
     {
       id: 1,
@@ -36,6 +39,7 @@ export default function Messages() {
             name={doctor.name}
             description={doctor.description}
             picture={doctor.picture}
+            onPress={() => navigation.navigate('Chatting')}
           />
         ))}
       </View>
