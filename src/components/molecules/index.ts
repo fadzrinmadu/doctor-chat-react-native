@@ -1,6 +1,7 @@
 import List from './List';
 import Header from './Header';
 import Profile from './Profile';
+import Loading from './Loading';
 import ChatItem from './ChatItem';
 import NewsItem from './NewsItem';
 import ChatInput from './ChatInput';
@@ -14,6 +15,7 @@ export {
   List,
   Header,
   Profile,
+  Loading,
   NewsItem,
   ChatItem,
   ChatInput,
