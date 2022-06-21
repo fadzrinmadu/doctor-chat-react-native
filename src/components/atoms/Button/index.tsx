@@ -1,10 +1,11 @@
 import React from 'react';
 import {
-  StyleSheet,
+  View,
   Text,
   TextStyle,
-  TouchableOpacity,
   ViewStyle,
+  StyleSheet,
+  TouchableOpacity,
 } from 'react-native';
 import { colors, fonts } from '../../../utils';
 import ButtonIconSend from './ButtonIconSend';
@@ -39,6 +40,14 @@ export default function Button({
     return <IconOnly icon={icon} onPress={onPress} />;
   }
 
+  if (disable) {
+    return (
+      <View style={styles.disableBG}>
+        <Text style={styles.disableText}>{title}</Text>
+      </View>
+    );
+  }
+
   return (
     <TouchableOpacity style={styles.container(type)} onPress={onPress}>
       <Text style={styles.text(type)}>{title}</Text>
@@ -64,4 +73,15 @@ const styles = StyleSheet.create<Style>({
     fontFamily: fonts.primary[600],
     textAlign: 'center',
   }),
+  disableBG: {
+    backgroundColor: colors.button.disable.background,
+    paddingVertical: 10,
+    borderRadius: 10,
+  },
+  disableText: {
+    color: colors.button.disable.text,
+    fontSize: 18,
+    fontFamily: fonts.primary[600],
+    textAlign: 'center',
+  },
 });

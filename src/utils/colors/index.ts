@@ -7,6 +7,7 @@ const mainColors = {
   gray1: '#7d8797',
   gray2: '#e9e9e9',
   gray3: '#edeef0',
+  gray4: '#b1b7c2',
   blue1: '#0066cb',
   black1: '#000000',
   black2: 'rgba(0, 0, 0, 0.5)',
@@ -35,6 +36,10 @@ const colors: any = {
     secondary: {
       background: 'white',
       text: mainColors.gray1,
+    },
+    disable: {
+      background: mainColors.gray3,
+      text: mainColors.gray4,
     },
   },
   border: mainColors.gray2,
