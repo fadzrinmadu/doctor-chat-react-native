@@ -1,22 +1,32 @@
 import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { IconAddPhoto, IconRemovePhoto, ILNullPhoto } from '../../assets';
 import { Button, Gap, Header, Link } from '../../components';
-import { colors, fonts } from '../../utils';
+import { colors, fonts, storeData } from '../../utils';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { showMessage } from 'react-native-flash-message';
+import { ref, update } from 'firebase/database';
+import { firebaseDB } from '../../config';
 
 export default function UploadPhoto() {
   const navigation = useNavigation();
+  const route = useRoute();
+
+  const { uid, fullname, profession } = route.params;
 
   const [photo, setPhoto] = useState(ILNullPhoto);
   const [hasPhoto, setHasPhoto] = useState(false);
+  const [photoForDB, setPhotoForDB] = useState('');
 
   const getImage = () => {
     launchImageLibrary(
       {
+        quality: 0.5,
+        maxWidth: 200,
+        maxHeight: 200,
         mediaType: 'photo',
+        includeBase64: true,
       },
       (response) => {
         if (response.didCancel || response?.error) {
@@ -26,12 +36,26 @@ export default function UploadPhoto() {
             color: colors.white,
           });
         } else {
+          const photoBase64 = `data:${response?.assets[0].type};base64, ${response?.assets[0].base64}`;
+          setPhotoForDB(photoBase64);
+
           const source = { uri: response?.assets[0]?.uri };
           setPhoto(source);
           setHasPhoto(true);
         }
       }
     );
+  };
+
+  const uploadAndContinue = () => {
+    const updates = { photo: photoForDB };
+    update(ref(firebaseDB, `users/${uid}`), updates);
+
+    const data = route.params;
+    data.photo = photoForDB;
+    storeData('user', data);
+
+    navigation.replace('MainApp');
   };
 
   return (
@@ -47,14 +71,14 @@ export default function UploadPhoto() {
               <IconAddPhoto style={styles.addPhoto} />
             )}
           </TouchableOpacity>
-          <Text style={styles.name}>Shayna Melinda</Text>
-          <Text style={styles.profession}>Product Designer</Text>
+          <Text style={styles.name}>{fullname}</Text>
+          <Text style={styles.profession}>{profession}</Text>
         </View>
         <View>
           <Button
             disable={!hasPhoto}
             title="Upload and Continue"
-            onPress={() => navigation.replace('MainApp')}
+            onPress={uploadAndContinue}
           />
           <Gap height={30} />
           <Link

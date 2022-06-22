@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
+import { set, ref } from 'firebase/database';
 import { useNavigation } from '@react-navigation/native';
 import { showMessage } from 'react-native-flash-message';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { set, ref } from 'firebase/database';
 
 import { Button, Gap, Header, Input, Loading } from '../../components';
 
-import { colors, useForm } from '../../utils';
+import { colors, storeData, useForm } from '../../utils';
 import { firebaseAuth, firebaseDB } from '../../config';
 
 export default function Register() {
@@ -26,15 +26,19 @@ export default function Register() {
     setLoading(true);
     createUserWithEmailAndPassword(firebaseAuth, form.email, form.password)
       .then((userCredential: any) => {
-        set(ref(firebaseDB, `users/${userCredential.user.uid}`), {
+        const data = {
+          uid: userCredential.user.uid,
           fullname: form.fullname,
           profession: form.profession,
           email: form.email,
-        });
+        };
+
+        set(ref(firebaseDB, `users/${userCredential.user.uid}`), data);
+        storeData('user', form);
 
         setLoading(false);
         setForm('reset');
-        navigation.push('UploadPhoto');
+        navigation.push('UploadPhoto', data);
       })
       .catch((error: any) => {
         showMessage({
