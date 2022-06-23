@@ -1,19 +1,22 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import { DummyUser, IconRemovePhoto } from '../../../assets';
+import { IconRemovePhoto } from '../../../assets';
 import { colors, fonts } from '../../../utils';
 
 type ProfileProps = {
   name?: string,
   description?: string,
   isRemove?: boolean,
+  photo: {
+    uri: string,
+  },
 };
 
-function Profile({ name, description, isRemove }: ProfileProps) {
+function Profile({ name, description, isRemove, photo }: ProfileProps) {
   return (
     <View style={styles.container}>
       <View style={styles.borderProfile}>
-        <Image style={styles.avatar} source={DummyUser} />
+        <Image style={styles.avatar} source={photo} />
         {isRemove && <IconRemovePhoto style={styles.removePhoto} />}
       </View>
       {name && (
