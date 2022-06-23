@@ -10,7 +10,7 @@ import { Button, Gap, Header, Input, Loading } from '../../components';
 import { colors, storeData, useForm } from '../../utils';
 import { firebaseAuth, firebaseDB } from '../../config';
 
-export default function Register() {
+function Register() {
   const navigation = useNavigation();
 
   const [form, setForm] = useForm({
@@ -102,3 +102,5 @@ const styles = StyleSheet.create({
     paddingTop: 0,
   },
 });
+
+export default Register;
