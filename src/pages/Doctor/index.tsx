@@ -2,12 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { onValue, ref } from 'firebase/database';
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import {
-  JSONCategoryDoctor,
-  DummyDoctor1,
-  DummyDoctor2,
-  DummyDoctor3,
-} from '../../assets';
+import { DummyDoctor1, DummyDoctor2, DummyDoctor3 } from '../../assets';
 import {
   Gap,
   NewsItem,
@@ -20,13 +15,21 @@ import { colors, fonts } from '../../utils';
 
 export default function Doctor() {
   const navigation = useNavigation();
+
   const [news, setNews] = useState([]);
+  const [categoryDoctor, setCategoryDoctor] = useState([]);
 
   useEffect(() => {
     const newsRef = ref(firebaseDB, 'news/');
     onValue(newsRef, (snapshot: any) => {
       const data = snapshot.val();
       setNews(data);
+    });
+
+    const categoryDoctorRef = ref(firebaseDB, 'category_doctor/');
+    onValue(categoryDoctorRef, (snapshot: any) => {
+      const data = snapshot.val();
+      setCategoryDoctor(data);
     });
   }, []);
 
@@ -45,7 +48,7 @@ export default function Doctor() {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View style={styles.category}>
                 <Gap width={32} />
-                {JSONCategoryDoctor.data.map((item) => (
+                {categoryDoctor.map((item: any) => (
                   <DoctorCategory
                     key={item.id}
                     category={item.category}
