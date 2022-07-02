@@ -6,15 +6,18 @@ import { colors, fonts } from '../../utils';
 
 export default function Splash({ navigation }: any): React.ReactElement {
   useEffect(() => {
-    setTimeout(() => {
-      firebaseAuth.onAuthStateChanged((user) => {
+    const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
+      setTimeout(() => {
         if (user) {
           navigation.replace('MainApp');
         } else {
           navigation.replace('GetStarted');
         }
-      });
-    }, 3000);
+      }, 3000);
+    });
+
+    // pembersihan fungsi unsubscribe
+    return () => unsubscribe();
   }, [navigation]);
 
   return (
