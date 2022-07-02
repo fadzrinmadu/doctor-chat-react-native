@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import { onValue, ref } from 'firebase/database';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import {
   JSONCategoryDoctor,
@@ -14,10 +15,20 @@ import {
   DoctorRated,
   DoctorCategory,
 } from '../../components';
+import { firebaseDB } from '../../config';
 import { colors, fonts } from '../../utils';
 
 export default function Doctor() {
   const navigation = useNavigation();
+  const [news, setNews] = useState([]);
+
+  useEffect(() => {
+    const newsRef = ref(firebaseDB, 'news/');
+    onValue(newsRef, (snapshot: any) => {
+      const data = snapshot.val();
+      setNews(data);
+    });
+  }, []);
 
   return (
     <View style={styles.page}>
@@ -67,9 +78,15 @@ export default function Doctor() {
             />
             <Text style={styles.sectionLabel}>Good News</Text>
           </View>
-          <NewsItem />
-          <NewsItem />
-          <NewsItem />
+          {news.length > 0 &&
+            news.map((item: any) => (
+              <NewsItem
+                key={item.id}
+                title={item.title}
+                image={item.image}
+                date={item.date}
+              />
+            ))}
           <Gap height={30} />
         </ScrollView>
       </View>
