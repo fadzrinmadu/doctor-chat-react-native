@@ -8,19 +8,20 @@ import { firebaseAuth, firebaseDB } from '../../config';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { onValue, ref } from 'firebase/database';
 import { showMessage } from 'react-native-flash-message';
+import { useDispatch } from 'react-redux';
+import { setLoading } from '../../stores/slices/loadingSlice';
 
 export default function Login() {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const [form, setForm] = useForm({
     email: '',
     password: '',
   });
 
-  const [loading, setLoading] = useState(false);
-
   const login = () => {
-    setLoading(true);
+    dispatch(setLoading(true));
     signInWithEmailAndPassword(firebaseAuth, form.email, form.password)
       .then((userCredential) => {
         onValue(
@@ -32,7 +33,7 @@ export default function Login() {
                 uid: userCredential.user.uid,
               });
 
-              setLoading(false);
+              dispatch(setLoading(false));
               navigation.replace('MainApp');
             }
           }
@@ -46,7 +47,7 @@ export default function Login() {
         });
       })
       .finally(() => {
-        setLoading(false);
+        dispatch(setLoading(false));
       });
   };
 
@@ -81,8 +82,6 @@ export default function Login() {
           />
         </ScrollView>
       </View>
-
-      {loading && <Loading />}
     </>
   );
 }
