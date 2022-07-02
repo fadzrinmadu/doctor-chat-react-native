@@ -8,7 +8,6 @@ export default function Splash({ navigation }: any): React.ReactElement {
   useEffect(() => {
     setTimeout(() => {
       firebaseAuth.onAuthStateChanged((user) => {
-        console.log(user);
         if (user) {
           navigation.replace('MainApp');
         } else {

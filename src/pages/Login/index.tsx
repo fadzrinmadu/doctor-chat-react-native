@@ -27,7 +27,11 @@ export default function Login() {
           ref(firebaseDB, `/users/${userCredential.user.uid}`),
           (snapshot) => {
             if (snapshot.val()) {
-              storeData('user', snapshot.val());
+              storeData('user', {
+                ...snapshot.val(),
+                uid: userCredential.user.uid,
+              });
+
               setLoading(false);
               navigation.replace('MainApp');
             }

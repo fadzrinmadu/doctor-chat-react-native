@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { IconRemovePhoto } from '../../../assets';
 import { colors, fonts } from '../../../utils';
 
@@ -10,15 +10,30 @@ type ProfileProps = {
   photo: {
     uri: string,
   },
+  onPress?: () => void,
 };
 
-function Profile({ name, description, isRemove, photo }: ProfileProps) {
+function Profile({
+  name,
+  photo,
+  onPress,
+  isRemove,
+  description,
+}: ProfileProps) {
   return (
     <View style={styles.container}>
-      <View style={styles.borderProfile}>
-        <Image style={styles.avatar} source={photo} />
-        {isRemove && <IconRemovePhoto style={styles.removePhoto} />}
-      </View>
+      {isRemove ? (
+        <TouchableOpacity style={styles.borderProfile} onPress={onPress}>
+          <Image style={styles.avatar} source={photo} />
+          {isRemove && <IconRemovePhoto style={styles.removePhoto} />}
+        </TouchableOpacity>
+      ) : (
+        <View style={styles.borderProfile}>
+          <Image style={styles.avatar} source={photo} />
+          {isRemove && <IconRemovePhoto style={styles.removePhoto} />}
+        </View>
+      )}
+
       {name && (
         <View>
           <Text style={styles.name}>{name}</Text>

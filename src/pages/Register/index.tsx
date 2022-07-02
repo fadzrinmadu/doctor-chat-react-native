@@ -34,7 +34,7 @@ function Register() {
         };
 
         set(ref(firebaseDB, `users/${userCredential.user.uid}`), data);
-        storeData('user', form);
+        storeData('user', data);
 
         setLoading(false);
         setForm('reset');

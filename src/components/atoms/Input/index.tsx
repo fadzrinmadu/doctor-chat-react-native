@@ -5,12 +5,13 @@ import { colors, fonts } from '../../../utils';
 type InputProps = {
   label: string,
   value: string,
+  disable?: boolean,
   onChangeText: () => void,
   secureTextEntry?: boolean,
 };
 
 export default function Input(props: InputProps) {
-  const { label, value, onChangeText, secureTextEntry } = props;
+  const { label, value, onChangeText, secureTextEntry, disable } = props;
 
   const [borderColor, setBorderColor] = useState(colors.border);
 
@@ -32,6 +33,8 @@ export default function Input(props: InputProps) {
         onChangeText={onChangeText}
         style={styles.input(borderColor)}
         secureTextEntry={secureTextEntry}
+        editable={!disable}
+        selectTextOnFocus={!disable}
       />
     </View>
   );
