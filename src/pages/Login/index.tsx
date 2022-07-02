@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Button, Gap, Input, Link, Loading } from '../../components';
+import { Button, Gap, Input, Link } from '../../components';
 import { ILLogo } from '../../assets';
-import { colors, fonts, storeData, useForm } from '../../utils';
+import { colors, fonts, showError, storeData, useForm } from '../../utils';
 import { firebaseAuth, firebaseDB } from '../../config';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { onValue, ref } from 'firebase/database';
-import { showMessage } from 'react-native-flash-message';
 import { useDispatch } from 'react-redux';
 import { setLoading } from '../../stores/slices/loadingSlice';
 
@@ -40,11 +39,7 @@ export default function Login() {
         );
       })
       .catch((error: any) => {
-        showMessage({
-          message: error.message,
-          backgroundColor: colors.error,
-          color: colors.white,
-        });
+        showError(error.message);
       })
       .finally(() => {
         dispatch(setLoading(false));
