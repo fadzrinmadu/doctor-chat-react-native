@@ -1,8 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
+import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { showMessage } from 'react-native-flash-message';
 import { ILNullPhoto } from '../../assets';
 import { Header, List, Profile, Gap } from '../../components';
+import { firebaseAuth } from '../../config';
 import { colors, getData } from '../../utils';
 
 function UserProfile() {
@@ -13,6 +16,20 @@ function UserProfile() {
     profession: '',
     photo: ILNullPhoto,
   });
+
+  const handleSignOut = () => {
+    signOut(firebaseAuth)
+      .then(() => {
+        navigation.replace('GetStarted');
+      })
+      .catch((error) => {
+        showMessage({
+          message: error.message,
+          backgroundColor: colors.error,
+          color: colors.white,
+        });
+      });
+  };
 
   useEffect(() => {
     getData('user').then((response) => {
@@ -54,10 +71,11 @@ function UserProfile() {
         icon="rate"
       />
       <List
-        name="Help Center"
+        name="Sign Out"
         description="Last Update Yesterday"
         type="next"
         icon="help"
+        onPress={handleSignOut}
       />
     </View>
   );
