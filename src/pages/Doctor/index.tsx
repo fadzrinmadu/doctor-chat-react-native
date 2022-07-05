@@ -29,7 +29,8 @@ export default function Doctor() {
     const newsRef = ref(firebaseDB, 'news/');
     onValue(newsRef, (snapshot: any) => {
       const data = snapshot.val();
-      setNews(data);
+      const filterData = data.filter((element: any) => element !== null);
+      setNews(filterData);
     });
   };
 
@@ -37,7 +38,8 @@ export default function Doctor() {
     const categoryDoctorRef = ref(firebaseDB, 'category_doctor/');
     onValue(categoryDoctorRef, (snapshot: any) => {
       const data = snapshot.val();
-      setCategoryDoctor(data);
+      const filterData = data.filter((element: any) => element !== null);
+      setCategoryDoctor(filterData);
     });
   };
 
