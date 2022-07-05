@@ -5,14 +5,24 @@ import { Button, Gap } from '../../atoms';
 import DarkProfile from './DarkProfile';
 
 type HeaderProps = {
+  photo: any,
   title: string,
   type?: string,
+  description: string,
   onPress: () => void,
 };
 
-export default function Header({ title, type, onPress }: HeaderProps) {
+export default function Header({
+  type,
+  title,
+  photo,
+  onPress,
+  description,
+}: HeaderProps) {
   if (type === 'dark-profile') {
-    return <DarkProfile onPress={onPress} />;
+    return (
+      <DarkProfile title={title} description={description} photo={photo} onPress={onPress} />
+    );
   }
 
   return (

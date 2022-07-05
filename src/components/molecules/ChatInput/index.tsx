@@ -3,11 +3,27 @@ import { StyleSheet, TextInput, View } from 'react-native';
 import { colors, fonts } from '../../../utils';
 import { Button } from '../../atoms';
 
-function ChatInput() {
+type ChatInputProps = {
+  value: string,
+  onChangeText: () => void,
+  onButtonPress: () => void,
+};
+
+function ChatInput({ value, onChangeText, onButtonPress }: ChatInputProps) {
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} placeholder="Tulis Pesan Untuk Nairobi" />
-      <Button title="Send" type="btn-icon-send" />
+      <TextInput
+        value={value}
+        style={styles.input}
+        onChangeText={onChangeText}
+        placeholder="Tulis Pesan Untuk Nairobi"
+      />
+      <Button
+        title="Send"
+        type="btn-icon-send"
+        value={value}
+        onPress={onButtonPress}
+      />
     </View>
   );
 }

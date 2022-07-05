@@ -6,9 +6,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import Router from './router';
 import store from './stores';
 import { Loading } from './components';
+import { LogBox } from 'react-native';
 
 function MainApp() {
   const stateGlobal: any = useSelector((state) => state);
+  LogBox.ignoreAllLogs();
+
   return (
     <>
       <NavigationContainer>

@@ -5,18 +5,21 @@ import { colors, fonts } from '../../../utils';
 import { Button } from '../../atoms';
 
 type DarkProfileProps = {
+  photo: any,
+  title: string,
+  description: string,
   onPress: () => void,
 };
 
-function DarkProfile({ onPress }: DarkProfileProps) {
+function DarkProfile({ title, description, photo, onPress }: DarkProfileProps) {
   return (
     <View style={styles.container}>
       <Button type="icon-only" icon="back-light" onPress={onPress} />
       <View style={styles.content}>
-        <Text style={styles.name}>Nairobi Putri Hayza</Text>
-        <Text style={styles.desc}>Dokter Anak</Text>
+        <Text style={styles.name}>{title}</Text>
+        <Text style={styles.desc}>{description}</Text>
       </View>
-      <Image style={styles.image} source={DummyDoctor9} />
+      <Image style={styles.image} source={{ uri: photo }} />
     </View>
   );
 }
@@ -47,6 +50,7 @@ const styles = StyleSheet.create({
     marginTop: 6,
     textAlign: 'center',
     color: colors.text.subtitle,
+    textTransform: 'capitalize',
   },
   image: {
     width: 46,

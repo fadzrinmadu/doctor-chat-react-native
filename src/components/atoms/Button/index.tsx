@@ -14,8 +14,9 @@ import IconOnly from './IconOnly';
 
 type ButtonProps = {
   type?: string,
-  title?: string,
   icon?: string,
+  title?: string,
+  value?: string,
   disable?: boolean,
   onPress?: () => void,
 };
@@ -28,12 +29,13 @@ type Style = {
 export default function Button({
   type,
   icon,
+  value,
   title,
   onPress,
   disable,
 }: ButtonProps): React.ReactElement {
   if (type === 'btn-icon-send') {
-    return <ButtonIconSend disable={disable} />;
+    return <ButtonIconSend onPress={onPress} disable={value?.length < 1} />;
   }
 
   if (type === 'icon-only') {

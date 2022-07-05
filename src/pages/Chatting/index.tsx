@@ -1,26 +1,37 @@
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { ChatInput, ChatItem, Header } from '../../components';
 import { colors, fonts } from '../../utils';
 
 function Chatting() {
+  const route = useRoute();
   const navigation = useNavigation();
+
+  const doctor = route?.params;
 
   return (
     <View style={styles.page}>
       <Header
         type="dark-profile"
-        title="Nairobi Putri Hayza"
+        photo={doctor?.photo}
+        title={doctor?.fullname}
+        description={doctor?.category}
         onPress={() => navigation.goBack()}
       />
       <View style={styles.content}>
-        <Text style={styles.chatDate}>Senin, 21 Maret 2020</Text>
-        <ChatItem isMe />
-        <ChatItem />
-        <ChatItem isMe />
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Text style={styles.chatDate}>Senin, 21 Maret 2020</Text>
+          <ChatItem isMe />
+          <ChatItem />
+          <ChatItem isMe />
+        </ScrollView>
       </View>
-      <ChatInput />
+      <ChatInput
+        value=""
+        onChangeText={() => console.log('onChangeText')}
+        onButtonPress={() => console.log('onButtonPress')}
+      />
     </View>
   );
 }
