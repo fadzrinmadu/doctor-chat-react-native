@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { Gap, Header, List } from '../../components';
 
@@ -13,53 +13,60 @@ import {
   DummyDoctor4,
   DummyDoctor5,
 } from '../../assets';
+import { equalTo, onValue, orderByChild, query, ref } from 'firebase/database';
+import { firebaseDB } from '../../config';
 
 function ChooseDoctor() {
+  const route = useRoute();
   const navigation = useNavigation();
+
+  const [doctors, setDoctors] = useState([]);
+
+  const { category } = route.params;
+
+  const getDoctorByCategory = (value: string) => {
+    const doctorByCategoryRef = query(
+      ref(firebaseDB, 'doctors/'),
+      orderByChild('category'),
+      equalTo(value)
+    );
+
+    onValue(doctorByCategoryRef, (snapshot: any) => {
+      const oldData = snapshot.val();
+      const data: any = [];
+
+      Object.keys(oldData).map((item: any) => {
+        data.push({
+          id: item,
+          data: oldData[item],
+        });
+      });
+
+      setDoctors(data);
+    });
+  };
+
+  useEffect(() => {
+    getDoctorByCategory(category);
+  }, [category]);
 
   return (
     <View style={styles.page}>
       <Header
-        title="Pilih Dokter Anak"
+        title={`Pilih ${category}`}
         type="dark"
         onPress={() => navigation.goBack()}
       />
       <Gap height={20} />
-      <List
-        type="next"
-        name="Alexander Jannie"
-        description="Wanita"
-        picture={DummyDoctor1}
-        onPress={() => navigation.navigate('Chatting')}
-      />
-      <List
-        type="next"
-        name="John McParker Steve"
-        description="Pria"
-        picture={DummyDoctor2}
-        onPress={() => navigation.navigate('Chatting')}
-      />
-      <List
-        type="next"
-        name="Nairobi Putri Hayza"
-        description="Wanita"
-        picture={DummyDoctor3}
-        onPress={() => navigation.navigate('Chatting')}
-      />
-      <List
-        type="next"
-        name="James Rivillia"
-        description="Pria"
-        picture={DummyDoctor4}
-        onPress={() => navigation.navigate('Chatting')}
-      />
-      <List
-        type="next"
-        name="Liu Yue Tian Park"
-        description="Wanita"
-        picture={DummyDoctor5}
-        onPress={() => navigation.navigate('Chatting')}
-      />
+      {doctors.map((item: any) => (
+        <List
+          type="next"
+          name={item.data.fullname}
+          description={item.data.gender}
+          picture={{ uri: item.data.photo }}
+          onPress={() => navigation.navigate('Chatting')}
+        />
+      ))}
     </View>
   );
 }

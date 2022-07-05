@@ -87,7 +87,7 @@ export default function Doctor() {
                   <DoctorCategory
                     key={item.id}
                     category={item.category}
-                    onPress={() => navigation.navigate('ChooseDoctor')}
+                    onPress={() => navigation.navigate('ChooseDoctor', item)}
                   />
                 ))}
                 <Gap width={22} />

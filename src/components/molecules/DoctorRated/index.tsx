@@ -1,7 +1,13 @@
 import React from 'react';
-import { Image, ImageSourcePropType, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Image,
+  ImageSourcePropType,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { IconStar } from '../../../assets';
-import { DummyDoctor1 } from '../../../assets/dummy';
 import { colors, fonts } from '../../../utils';
 
 type DoctorProfileProps = {
