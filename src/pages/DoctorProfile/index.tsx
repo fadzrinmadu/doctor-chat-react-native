@@ -10,8 +10,6 @@ function DoctorProfile() {
 
   const doctor = route?.params?.data;
 
-  console.log('DOCTOR PROFILE: ', doctor);
-
   return (
     <View style={styles.page}>
       <Header title="Doctor Profile" onPress={() => navigation.goBack()} />
