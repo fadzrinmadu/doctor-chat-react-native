@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { List } from '../../components';
-import { colors, fonts } from '../../utils';
+import { colors, fonts, getData } from '../../utils';
 import { DummyDoctor4, DummyDoctor5, DummyDoctor6 } from '../../assets';
 import { useNavigation } from '@react-navigation/native';
+import { firebaseDB } from '../../config';
+import { onValue, ref } from 'firebase/database';
 
 export default function Messages() {
   const navigation = useNavigation();
+
+  const [user, setUser] = useState({});
+  const [historyChat, setHistoryChat] = useState([]);
 
   const [doctors] = useState([
     {
@@ -29,19 +34,57 @@ export default function Messages() {
     },
   ]);
 
+  const getDataUserFromLocal = () => {
+    getData('user').then((response: any) => {
+      setUser(response);
+    });
+  };
+
+  useEffect(() => {
+    getDataUserFromLocal();
+    const urlHistory = `messages/${user?.uid}`;
+    const messagesRef = ref(firebaseDB, urlHistory);
+    onValue(messagesRef, (snapshot) => {
+      if (snapshot.val()) {
+        const oldData = snapshot.val();
+        const data: any = [];
+
+        Object.keys(oldData).map(async (key) => {
+          const urlUidDoctor = `doctors/${oldData[key].uidPartner}`;
+          const doctorsRef = ref(firebaseDB, urlUidDoctor);
+          onValue(doctorsRef, (snapshotDoctor) => {
+            data.push({
+              id: key,
+              detailDoctor: snapshotDoctor.val(),
+              ...oldData[key],
+            });
+          });
+        });
+
+        setHistoryChat(data);
+      }
+    });
+  }, [user?.uid]);
+
   return (
     <View style={styles.page}>
       <View style={styles.content}>
         <Text style={styles.title}>Messages</Text>
-        {doctors.map((doctor) => (
-          <List
-            key={doctor.id}
-            name={doctor.name}
-            description={doctor.description}
-            picture={doctor.picture}
-            onPress={() => navigation.navigate('Chatting')}
-          />
-        ))}
+        {historyChat.map((item) => {
+          const doctor = {
+            ...item?.detailDoctor,
+          };
+
+          return (
+            <List
+              key={item?.id}
+              name={item?.detailDoctor?.fullname}
+              picture={{uri: item?.detailDoctor?.photo}}
+              description={item?.lastContentChat}
+              onPress={() => navigation.navigate('Chatting', doctor)}
+            />
+          );
+        })}
       </View>
     </View>
   );

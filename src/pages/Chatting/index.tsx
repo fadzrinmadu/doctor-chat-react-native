@@ -33,6 +33,25 @@ function Chatting() {
 
     const urlFirebase = `/chatting/${chatId}/chats/${dateChat}/${newChatKey}`;
     set(ref(firebaseDB, urlFirebase), data);
+
+    const urlMessageUser = `/messages/${user?.uid}/${chatId}`;
+    const urlMessageDoctor = `/messages/${doctor?.uid}/${chatId}`;
+
+    const dataHistoryChatForUser = {
+      lastContentChat: chatContent,
+      lastChatDate: today.getTime(),
+      uidPartner: doctor?.uid,
+    };
+
+    const dataHistoryChatForDoctor = {
+      lastContentChat: chatContent,
+      lastChatDate: today.getTime(),
+      uidPartner: user?.uid,
+    };
+
+    set(ref(firebaseDB, urlFirebase), data);
+    set(ref(firebaseDB, urlMessageUser), dataHistoryChatForUser);
+    set(ref(firebaseDB, urlMessageDoctor), dataHistoryChatForDoctor);
   };
 
   const getDataUserFromLocal = () => {
